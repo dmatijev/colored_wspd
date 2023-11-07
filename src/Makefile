@@ -10,20 +10,23 @@ LIBS 	= -lm
 
 all: wsp
 
-wsp: Makefile wsp.o wsp.h util.o gen.o findwsp.o
-	$(CLINKER) $(OPTIONS) -o wsp wsp.o util.o gen.o findwsp.o $(LIBS)
+wsp: Makefile wsp.o wsp.h Timer.h util.o gen.o findwsp.o main.o
+	$(CLINKER) $(OPTIONS) -o wsp wsp.o util.o findwsp.o gen.o main.o $(LIBS)
 
-wsp.o: Makefile wsp.c wsp.h
-	$(CC) $(OPTIONS) -c wsp.c
+wsp.o: Makefile wsp.cpp wsp.h
+	$(CC) $(OPTIONS) -c wsp.cpp
 
-util.o: Makefile util.c wsp.h
-	$(CC) $(OPTIONS) -c util.c
+util.o: Makefile util.cpp wsp.h
+	$(CC) $(OPTIONS) -c util.cpp
 
-gen.o: Makefile gen.c wsp.h
-	$(CC) $(OPTIONS) -c gen.c
+gen.o: Makefile gen.cpp wsp.h
+	$(CC) $(OPTIONS) -c gen.cpp
 
-findwsp.o: Makefile findwsp.c wsp.h
-	$(CC) $(OPTIONS) -c findwsp.c
+findwsp.o: Makefile findwsp.cpp wsp.h
+	$(CC) $(OPTIONS) -c findwsp.cpp
+	
+main.o: Makefile main.cpp wsp.h Timer.h
+	$(CC) $(OPTIONS) -c main.cpp
 
 clean:
 	-rm -f *.o
